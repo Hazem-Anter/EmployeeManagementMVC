@@ -1,0 +1,119 @@
+﻿@using WebApp2.BLL.ModelVM.Employee
+@using WebApp2.BLL.ModelVM.ResponseResult
+@model Response<List<GetEmployeeVM>>
+
+<div class="container py-5 min-vh-100">
+    <h2 class="text-center mb-5 fw-bold text-light">👥 @SharedLocalizer["Employee Directory"]</h2>
+
+    <div class="text-center mb-4">
+        <a asp-action="Add" asp-controller="Employee" class="btn btn-glass-success px-4 shadow-sm rounded-pill">
+            ➕ @SharedLocalizer["Add Employee"]
+        </a>
+    </div>
+
+    <div class="row justify-content-center g-4">
+        @if (Model.result != null && Model.result.Any())
+        {
+            foreach (var item in Model.result)
+            {
+                if (!item.IsDeleted)
+                {
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="card glass-card shadow-lg border-0 rounded-4 h-100 overflow-hidden">
+
+                            <!-- 🖼️ Employee Image -->
+                            <div class="position-relative">
+                                <img src="~/Files/@item.Image" class="card-img-top"
+                                     alt="Employee Image"
+                                     style="height: 220px; object-fit: cover;">
+                            </div>
+
+                            <div class="card-body p-4 text-light">
+                                <h5 class="card-title fw-bold text-center text-white mb-3">@item.Name</h5>
+                                <p class="card-text mb-2">
+                                    💰 <strong>@SharedLocalizer["Salary"]:</strong> @item.Salary.ToString("C")
+                                </p>
+                                <p class="card-text">
+                                    🏢 <strong>@SharedLocalizer["Department"]:</strong> @item.Department
+                                </p>
+                            </div>
+
+                            <div class="card-footer border-0 d-flex justify-content-between px-4 pb-3 bg-transparent">
+                                <a asp-action="Edit" asp-controller="Employee" asp-route-id="@item.Id"
+                                   class="btn btn-glass-primary btn-sm px-3">
+                                    ✏️ @SharedLocalizer["Edit"]
+                                </a>
+
+                                <a asp-action="Delete" asp-controller="Employee" asp-route-id="@item.Id"
+                                   class="btn btn-glass-danger btn-sm px-3">
+                                    🗑️ @SharedLocalizer["Delete"]
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        }
+        else
+        {
+            <div class="text-center text-light mt-5">
+                <h5>@SharedLocalizer["No employees found."]</h5>
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+    /* ===== Frosted Glass Base Style ===== */
+    .glass-card {
+        background: rgba(255, 255, 255, 0.12);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .glass-card:hover {
+            transform: translateY(-6px);
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+        }
+
+    /* ===== Text ===== */
+    .card-body p, .card-title {
+        color: #f1f1f1;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+    }
+
+    /* ===== Buttons ===== */
+    .btn-glass-primary,
+    .btn-glass-danger,
+    .btn-glass-success {
+        background: rgba(255, 255, 255, 0.15);
+        color: #fff;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(10px);
+        transition: all 0.3s ease;
+    }
+
+        .btn-glass-primary:hover {
+            background: rgba(13, 110, 253, 0.6);
+        }
+
+        .btn-glass-danger:hover {
+            background: rgba(220, 53, 69, 0.6);
+        }
+
+        .btn-glass-success:hover {
+            background: rgba(25, 135, 84, 0.6);
+        }
+
+    /* ===== Headings ===== */
+    h2 {
+        text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    }
+
+    /* ===== Smooth Scroll Effect ===== */
+    html {
+        scroll-behavior: smooth;
+    }
+</style>

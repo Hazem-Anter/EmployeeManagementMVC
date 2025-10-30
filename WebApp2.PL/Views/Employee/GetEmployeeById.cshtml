@@ -1,0 +1,126 @@
+﻿@using WebApp2.BLL.ModelVM.Employee
+@using WebApp2.BLL.ModelVM.ResponseResult
+@model Response<GetEmployeeVM>
+
+<div class="d-flex justify-content-center align-items-center min-vh-100" style="backdrop-filter: blur(6px);">
+    <div class="card shadow-lg p-4 rounded-4 glass-card" style="width: 480px;">
+        <div class="card-body">
+
+            <!-- 🖼️ Employee Image -->
+            <div class="mb-4 text-center">
+                <img src="~/Files/@Model.result.Image"
+                     alt="Employee Photo"
+                     class="rounded-circle border shadow-sm"
+                     style="width: 120px; height: 120px; object-fit: cover;">
+            </div>
+
+            <h3 class="card-title mb-4 text-center fw-bold text-light">
+                👤 @SharedLocalizer["Employee Details"]
+            </h3>
+
+            <!-- Name -->
+            <div class="mb-3 text-start">
+                <label class="form-label fw-semibold text-light">@SharedLocalizer["Name"]</label>
+                <input type="text" class="form-control glass-input" asp-for="result.Name" disabled>
+            </div>
+
+            <!-- Salary -->
+            <div class="mb-3 text-start">
+                <label class="form-label fw-semibold text-light">@SharedLocalizer["Salary"]</label>
+                <input type="text" class="form-control glass-input" asp-for="result.Salary" disabled>
+            </div>
+
+            <!-- Department -->
+            <div class="mb-4 text-start">
+                <label class="form-label fw-semibold text-light">@SharedLocalizer["Department"]</label>
+                <input type="text" class="form-control glass-input" asp-for="result.Department" disabled>
+            </div>
+
+            <!-- Buttons -->
+            <div class="d-flex justify-content-between mt-4">
+                <a asp-action="GetEmployees"
+                   asp-controller="Employee"
+                   class="btn btn-outline-light px-4">
+                    ← @SharedLocalizer["Back"]
+                </a>
+
+                @if (Model.result.IsDeleted)
+                {
+                    <form asp-action="Rehire" asp-controller="Employee" method="post" class="d-inline">
+                        <input type="hidden" name="id" value="@Model.result.Id" />
+                        <button type="submit" class="btn btn-success px-4 shadow-sm">
+                            🔁 @SharedLocalizer["Rehire"]
+                        </button>
+                    </form>
+                }
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<style>
+    /* 🌫️ Glass card */
+    .glass-card {
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+    }
+
+    /* ✨ Glass inputs */
+    .glass-input {
+        background: rgba(255, 255, 255, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 10px;
+        padding: 10px 12px;
+        color: #f55;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+
+        .glass-input:focus {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: #0d6efd;
+            box-shadow: 0 0 10px rgba(13, 110, 253, 0.3);
+            color: #fff;
+        }
+
+    /* Buttons hover */
+    .btn-outline-light:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+        color: #fff;
+    }
+
+    .btn-primary:hover {
+        background-color: #0d6efd;
+        transform: scale(1.03);
+    }
+
+    /* Text contrast */
+    body {
+        color: #fff;
+    }
+
+    .text-light {
+        color: rgba(255, 255, 255, 0.9);
+    }
+
+    .text-warning {
+        color: #ffea75 !important;
+    }
+
+    [dir="rtl"] .text-start {
+        text-align: right !important;
+        direction: rtl;
+    }
+
+    [dir="rtl"] .d-flex.justify-content-between {
+        flex-direction: row-reverse;
+    }
+
+    [dir="rtl"] input,
+    [dir="rtl"] select {
+        text-align: right;
+    }
+</style>

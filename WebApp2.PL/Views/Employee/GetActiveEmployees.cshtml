@@ -1,0 +1,157 @@
+﻿@using WebApp2.BLL.ModelVM.Employee
+@using WebApp2.BLL.ModelVM.ResponseResult
+@model Response<List<GetEmployeeVM>>
+
+<div class="container py-5 min-vh-100 d-flex flex-column justify-content-center">
+    <h2 class="text-center mb-5 fw-bold text-light text-shadow">👥 @SharedLocalizer["Active Employees Directory"]</h2>
+
+    <div class="text-center mb-4">
+        <a asp-action="Add" asp-controller="Employee" class="btn btn-success px-4 py-2 shadow-lg">
+            ➕ @SharedLocalizer["Add Employee"]
+        </a>
+    </div>
+
+    @if (Model.result != null && Model.result.Any())
+    {
+        <div class="table-responsive glass-card shadow-lg rounded-4 p-3">
+            <table class="table align-middle table-hover table-bordered text-center text-light mb-0">
+                <thead class="table-dark bg-opacity-75">
+                    <tr>
+                        <th scope="col">@SharedLocalizer["Name"]</th>
+                        <th scope="col">@SharedLocalizer["Salary"]</th>
+                        <th scope="col">@SharedLocalizer["Department"]</th>
+                        <th scope="col">@SharedLocalizer["Situation"]</th>
+                        <th>@SharedLocalizer["View"]</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.result)
+                    {
+                        <tr>
+                            <td class="fw-semibold">
+                                <div class="d-flex justify-content-center align-items-center">
+                                    <img src="~/Files/@item.Image"
+                                         asp-append-version="true"
+                                         alt="Photo of @item.Name"
+                                         width="50" height="50"
+                                         loading="lazy" decoding="async"
+                                         class="rounded-circle me-2 border shadow-sm"
+                                         style="object-fit: cover;">
+                                    <span>@item.Name</span>
+                                </div>
+                            </td>
+                            <td>@item.Salary.ToString("C")</td>
+                            <td>@item.Department</td>
+                            <td>
+                                @if (!item.IsDeleted)
+                                {
+                                    <span class="badge bg-success px-3 py-2 shadow-sm">
+                                        🟢 @SharedLocalizer["Still Working"]
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-danger px-3 py-2 shadow-sm">
+                                        🔴 @SharedLocalizer["Left"]
+                                    </span>
+                                }
+                            </td>
+                            <td>
+                                <a asp-action="GetEmployeeById" asp-controller="Employee" asp-route-id="@item.Id"
+                                   class="btn btn-outline-light btn-sm px-3 shadow-sm">
+                                    @SharedLocalizer["View"]
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="text-center text-light mt-5 text-shadow">
+            <h5>@SharedLocalizer["No employees found."]</h5>
+        </div>
+    }
+</div>
+
+<style>
+    /* Frosted glass look for table rows */
+    tr {
+        background: rgba(255, 255, 255, 0.12);
+        color: #f8f9fa;
+        transition: all 0.3s ease;
+    }
+
+        tr:hover {
+            background: rgba(255, 255, 255, 0.25) !important;
+            color: #ffffff !important;
+            transform: scale(1.01);
+        }
+
+    /* Table header */
+    th {
+        background: rgba(255, 255, 255, 0.3) !important;
+        color: #ffffff;
+        backdrop-filter: blur(10px);
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    td {
+        color: #f8f9fa;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    table {
+        border-collapse: separate;
+        border-spacing: 0 0.5rem;
+        width: 100%;
+        min-width: 1200px; /* 🔥 Prevent shrinking */
+        table-layout: fixed; /* keeps columns evenly sized */
+    }
+
+    .table-responsive {
+        border-radius: 15px;
+        overflow-x: auto;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    /* Smooth and clean look for buttons */
+    .btn-outline-light {
+        color: #ffffff;
+        border-color: #ffffff;
+        background: rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+    }
+
+        .btn-outline-light:hover {
+            background: rgba(255, 255, 255, 0.25);
+            color: #000;
+        }
+
+    /* Make page container wider */
+    .container {
+        max-width: 1400px; /* same width as other pages */
+    }
+
+    .text-shadow {
+        text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+    }
+
+    /* ✅ RTL Styling (Arabic) */
+    [dir="rtl"] th,
+    [dir="rtl"] td {
+        text-align: center !important;
+    }
+
+    [dir="rtl"] .d-flex {
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+</style>

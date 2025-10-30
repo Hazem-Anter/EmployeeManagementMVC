@@ -1,0 +1,152 @@
+﻿@using WebApp2.BLL.ModelVM.Department
+@using WebApp2.BLL.ModelVM.Employee
+@using WebApp2.BLL.ModelVM.ResponseResult
+@using WebApp2.BLL.Service.Abstraction
+@model EditEmployeeVM
+
+@inject IDepartmentService departmentService;
+
+@{
+    //var departments = (Response<List<GetDepartmentVM>>)ViewBag.departments;
+    // inatesd of ViewBag , we will use @inject and ===> : 
+    var departments = departmentService.GetDepartments();
+}
+
+<div class="d-flex justify-content-center align-items-center min-vh-100" style="backdrop-filter: blur(6px);">
+    <div class="card shadow-lg p-4 rounded-4 glass-card" style="width: 480px;">
+        <div class="card-body">
+
+            <h3 class="card-title mb-4 text-center fw-bold text-light">
+                ✏️ @SharedLocalizer["Edit"]
+            </h3>
+
+            <form asp-action="Edit" asp-controller="Employee" enctype="multipart/form-data">
+                <input type="hidden" asp-for="Id" />
+                <input type="hidden" asp-for="Image" />
+
+                <!-- Name -->
+                <div class="mb-3">
+                    <label asp-for="Name" class="form-label fw-semibold text-light">@SharedLocalizer["Name"]</label>
+                    <input type="text" class="form-control glass-input" asp-for="Name" placeholder="Enter employee name">
+                    <span class="text-warning small" asp-validation-for="Name"></span>
+                </div>
+
+                <!-- Salary -->
+                <div class="mb-3">
+                    <label asp-for="Salary" class="form-label fw-semibold text-light">@SharedLocalizer["Salary"]</label>
+                    <input type="text" class="form-control glass-input" asp-for="Salary" placeholder="Enter salary">
+                    <span class="text-warning small" asp-validation-for="Salary"></span>
+                </div>
+
+                <!-- Department -->
+                @if (departments.HasError)
+                {
+                    <p>@departments.errorMessage</p>
+                }
+                else
+                {
+                    <div class="mb-4">
+                        <label asp-for="DepId" class="form-label text-light fw-semibold">@SharedLocalizer["Department"]</label>
+                        <select asp-for="DepId" class="form-select glass-input">
+                            <option value="">-- @SharedLocalizer["Select Department"] --</option>
+                            @foreach (var item in departments.result)
+                            {
+                                <option value="@item.Id">@item.Name</option>
+                            }
+
+                        </select>
+                        <span class="text-warning small" asp-validation-for="DepId"></span>
+                    </div>
+                }
+
+                <!-- Existing image -->
+                @if (!string.IsNullOrEmpty(Model.Image))
+                {
+                    <div class="mb-3 text-center">
+                        <img src="~/Files/@Model.Image" alt="Current Image"
+                             class="img-thumbnail" style="width:150px; height:150px; object-fit:cover;" />
+                    </div>
+                } 
+
+                <!-- Upload new image -->
+                <div class="mb-4">
+                    <label asp-for="ImageUpload" class="form-label fw-semibold text-light">@SharedLocalizer["Upload New Image"]</label>
+                    <input type="file" class="form-control glass-input" asp-for="ImageUpload">
+                    <span class="text-warning small" asp-validation-for="ImageUpload"></span>
+                </div>
+
+                <!-- Buttons -->
+                <div class="d-flex justify-content-between mt-4">
+                    <a asp-action="Action" asp-controller="Employee"
+                       class="btn btn-outline-light px-4">
+                        ← @SharedLocalizer["Back"]
+                    </a>
+                    <input type="submit" value="💾 Save Changes"
+                           class="btn btn-primary px-4 shadow-sm" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* ✨ Card background (semi-transparent glass look) */
+    .glass-card {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(10px);
+    }
+
+    /* 🌫️ Input and select styling */
+    .glass-input {
+        background: rgba(255, 255, 255, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        color: #fff;
+        border-radius: 8px;
+        padding: 10px 12px;
+        transition: all 0.3s ease;
+    }
+
+        .glass-input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .glass-input:focus {
+            border-color: rgba(13, 110, 253, 0.8);
+            box-shadow: 0 0 10px rgba(13, 110, 253, 0.5);
+            outline: none;
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+    /* 🩶 Make dropdown options visible */
+    select.glass-input option {
+        background-color: rgba(255, 255, 255, 0.9);
+        color: #000;
+    }
+
+    /* ⚡ Buttons */
+    .btn-outline-light:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+        color: #fff;
+    }
+
+    /* 🔤 Text contrast fix */
+    body {
+        color: #fff;
+    }
+
+    /* ✅ RTL helpers: they will only apply when layout sets dir="rtl" */
+    [dir="rtl"] .card-body {
+        text-align: right;
+    }
+
+    [dir="rtl"] label.form-label {
+        display: block;
+        text-align: right;
+    }
+
+    [dir="rtl"] .d-flex.justify-content-between {
+        flex-direction: row-reverse;
+    }
+</style>
+

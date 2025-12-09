@@ -10,6 +10,8 @@ namespace WebApp2.DAL.Common
         {
             services.AddScoped<IEmployeeRepo, EmployeeRepo>();
             services.AddScoped<IDepartmentRepo, DepartmentRepo>();
+
+
             return services;
         }
     }

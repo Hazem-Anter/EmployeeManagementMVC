@@ -1,10 +1,12 @@
 ﻿
+using Microsoft.AspNetCore.Identity;
+
 namespace WebApp2.DAL.Entity
 {
-    public class Employee
+    public class Employee : IdentityUser
     {
-        [Key]
-        public int Id { get; private set; }
+        //[Key]
+        //public int Id { get; private set; }
         public string Name { get; private set; }
         public decimal Salary { get; private set; }
         public string? Image {  get; private set; }
@@ -29,6 +31,16 @@ namespace WebApp2.DAL.Entity
                 CreatedBy = createdBy;
                 CreatedOn = DateTime.Now;
                 DepId = depId; 
+        }
+
+        public Employee(string name, int depId, string username, string createdBy)
+        {
+
+            Name = name;
+            UserName = username;
+            CreatedBy = createdBy;
+            CreatedOn = DateTime.Now;
+            DepId = depId;
         }
 
         public bool Update(string name, decimal salary, string image, int depId, string updatedBy)

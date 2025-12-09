@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApp2.BLL.ModelVM.Employee;
 using WebApp2.BLL.Service.Abstraction;
@@ -22,7 +23,7 @@ namespace WebApp2.PL.Controllers
         /*
                 // Get All Employees     
         */
-
+        [Authorize]
         [HttpGet]
         public IActionResult GetEmployees()
         {
@@ -33,7 +34,7 @@ namespace WebApp2.PL.Controllers
         /*
                 // Get Active Employees     
         */
-
+        [Authorize]
         [HttpGet]
         public IActionResult GetActiveEmployees()
         {
@@ -44,7 +45,7 @@ namespace WebApp2.PL.Controllers
         /*
                 // Get Not Active Employees     
         */
-
+        [Authorize]
         [HttpGet]
         public IActionResult GetNotActiveEmployees()
         {
@@ -55,8 +56,9 @@ namespace WebApp2.PL.Controllers
         /*
                 // Get Employee By ID     
         */
+        [Authorize(Roles = "user")]
         [HttpGet]
-        public IActionResult GetEmployeeById(int id) 
+        public IActionResult GetEmployeeById(string id) 
         {
             var employee = employeeService.GetEmployeeByID(id);
             return View("GetEmployeeById", employee);
@@ -65,8 +67,9 @@ namespace WebApp2.PL.Controllers
         /*
                 // view/Get Employee By Id To Edit his/her Data     
         */
+        [Authorize(Roles = "admin")]
         [HttpGet]
-        public IActionResult Edit(int id)
+        public IActionResult Edit(string id)
         {
             var employee = employeeService.GetEmployeeByID(id);
             /*//EditEmployeeVM editedMappedEmployee = new EditEmployeeVM()
@@ -114,8 +117,9 @@ namespace WebApp2.PL.Controllers
         /*
                 // view/Get Employee By Id To delete Employee      
         */
+        [Authorize]
         [HttpGet]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(string id)
         {
             var employee = employeeService.GetEmployeeByID(id);
             /*//DeleteEmployeeVM deletedMappedEmployee = new DeleteEmployeeVM()
@@ -145,6 +149,7 @@ namespace WebApp2.PL.Controllers
         /*
                 // view Empty Form for the Addition       
         */
+        [Authorize]
         [HttpGet]
         public IActionResult Add()
         {
@@ -178,7 +183,7 @@ namespace WebApp2.PL.Controllers
             var employee = employeeService.AddEmployee(addEmployeeVM);
             return RedirectToAction("GetEmployees", "Employee");
         }
-
+        [Authorize]
         [HttpGet]
         public IActionResult Action()
         {
@@ -189,8 +194,9 @@ namespace WebApp2.PL.Controllers
         /*
                 // Rehire an Employee (Set IsDeleted = false)
         */
+        [Authorize]
         [HttpPost]
-        public IActionResult Rehire(int id)
+        public IActionResult Rehire(string id)
         {
             var result = employeeService.RehireEmployee(id);
 

@@ -1,9 +1,12 @@
 
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Razor;
 using System.Globalization;
 using WebApp2.BLL.Common;
 using WebApp2.DAL.Common;
+using WebApp2.DAL.Entity;
 using WebApp2.PL.Language;
 
 namespace WebApp2.PL
@@ -30,6 +33,35 @@ namespace WebApp2.PL
             builder.Services.AddDbContext<WebApp2DbContext>(options =>
             options.UseSqlServer(connectionString));
 
+            // Identity 
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                    .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme,
+                        options =>
+                        {
+                            options.LoginPath = new PathString("/Account/Login");
+                            options.AccessDeniedPath = new PathString("/Account/Login");
+                        });
+            
+            builder.Services.AddIdentityCore<Employee>(options => options.SignIn.RequireConfirmedAccount = false)
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<WebApp2DbContext>()
+                .AddTokenProvider<DataProtectorTokenProvider<Employee>>(TokenOptions.DefaultProvider);
+
+            // change the characteristics of the password
+            builder.Services.AddIdentity<Employee, IdentityRole>(options =>
+            {
+                // Default Password settings.
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequiredLength = 6;
+                options.Password.RequiredUniqueChars = 0;
+            }).AddEntityFrameworkStores<WebApp2DbContext>();
+
+
+
+
             // Dependancy Injection
             builder.Services.AddBusniessInDAL();
             builder.Services.AddBusinessInBLL();
@@ -54,6 +86,8 @@ namespace WebApp2.PL
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

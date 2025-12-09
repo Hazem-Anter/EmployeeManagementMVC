@@ -144,6 +144,12 @@
   <data name="Back" xml:space="preserve">
     <value>عودة</value>
   </data>
+  <data name="Back to login" xml:space="preserve">
+    <value>العودة إلى تسجيل الدخول</value>
+  </data>
+  <data name="Create account" xml:space="preserve">
+    <value>إنشاء حساب</value>
+  </data>
   <data name="Delete" xml:space="preserve">
     <value>مسح</value>
   </data>
@@ -152,6 +158,9 @@
   </data>
   <data name="Edit" xml:space="preserve">
     <value>تعديل</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>بريد إلكتروني</value>
   </data>
   <data name="Employee Details" xml:space="preserve">
     <value>تفاصيل الموظف</value>
@@ -165,11 +174,20 @@
   <data name="English" xml:space="preserve">
     <value>اللغة الإنجليزية</value>
   </data>
+  <data name="Forgot your password?" xml:space="preserve">
+    <value>نسيت كلمة السر؟</value>
+  </data>
   <data name="Image" xml:space="preserve">
     <value>الصورة</value>
   </data>
   <data name="Left" xml:space="preserve">
     <value>ترك العمل</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>تسجيل الدخول</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>تسجيل الخروج</value>
   </data>
   <data name="Name" xml:space="preserve">
     <value>الاسم</value>
@@ -182,6 +200,12 @@
   </data>
   <data name="Non Active Employees Directory" xml:space="preserve">
     <value>دليل الموظفين غير النشطين</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>كلمة المرور</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>تسجيل حساب جديد</value>
   </data>
   <data name="Rehire" xml:space="preserve">
     <value>إعادة التوظيف</value>
@@ -212,6 +236,9 @@
   </data>
   <data name="Upload New Image" xml:space="preserve">
     <value>تحميل صورة جديدة</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>اسم المستخدم</value>
   </data>
   <data name="View" xml:space="preserve">
     <value>عرض</value>

@@ -1,9 +1,10 @@
 ﻿
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using WebApp2.DAL.Entity;
 
 namespace WebApp2.DAL.Database
 {
-    public class WebApp2DbContext : DbContext
+    public class WebApp2DbContext : IdentityDbContext
     {
         public DbSet<Employee> Employees { get; set; }
 

@@ -69,7 +69,7 @@ namespace WebApp2.BLL.Service.Implementation
         /*
                 // Rehire Employee     
         */
-        public Response<bool> RehireEmployee(int id)
+        public Response<bool> RehireEmployee(string id)
         {
             try
             {
@@ -218,7 +218,7 @@ namespace WebApp2.BLL.Service.Implementation
         /*
                 // Get employee By ID     
         */
-        public Response<GetEmployeeVM> GetEmployeeByID(int id)
+        public Response<GetEmployeeVM> GetEmployeeByID(string id)
         {
             try
             {

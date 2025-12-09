@@ -37,7 +37,7 @@ namespace WebApp2.DAL.Repo.Implementation
 
 
         // Delete Employee
-        public bool DeleteEmployee(int id)
+        public bool DeleteEmployee(string id)
         {
             try
             {
@@ -61,7 +61,7 @@ namespace WebApp2.DAL.Repo.Implementation
             
         }
         // rehire Employee
-        public bool RehireEmployee(int id)
+        public bool RehireEmployee(string id)
         {
             try
             {
@@ -111,7 +111,7 @@ namespace WebApp2.DAL.Repo.Implementation
 
 
         // Get Employee By Id
-        public Employee GetEmployeeById(int id)
+        public Employee GetEmployeeById(string id)
         {
             try
             {
@@ -155,7 +155,7 @@ namespace WebApp2.DAL.Repo.Implementation
             {
                 var result = dbContext.Employees.Where(emp => emp.Id == employee.Id).Include(dep => dep.Department).FirstOrDefault();
 
-                if (result.Id != null && result.Id > 0)
+                if (result.Id != null)
                 {
                     result.ToggleStatus("Ali");
                     dbContext.SaveChanges();

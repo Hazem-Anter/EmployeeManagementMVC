@@ -3,7 +3,7 @@ namespace WebApp2.BLL.ModelVM.Employee
 {
     public class GetEmployeeVM
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string Name { get; set; }
         public decimal Salary { get; set; }
         public int DepId { get; set; }

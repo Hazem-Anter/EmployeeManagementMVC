@@ -1,0 +1,17 @@
+﻿@{
+    ViewData["Title"] = "Access Denied";
+}
+
+<div class="d-flex flex-column justify-content-center align-items-center min-vh-100 bg-dark text-light text-center">
+    <h1 class="display-4 fw-bold mb-3">🚫 Access Denied</h1>
+    <p class="lead mb-4">You don't have permission to view this page.</p>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-outline-light px-4 py-2 shadow-sm">
+        ⬅ Back to Home
+    </a>
+</div>
+
+<style>
+    body {
+        background: linear-gradient(135deg, #1e1e2f, #282a36);
+    }
+</style>

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApp2.DAL.Database;
 
@@ -11,9 +12,11 @@ using WebApp2.DAL.Database;
 namespace WebApp2.DAL.Migrations
 {
     [DbContext(typeof(WebApp2DbContext))]
-    partial class WebApp2DbContextModelSnapshot : ModelSnapshot
+    [Migration("20251031181015_AddConstructorEmployee")]
+    partial class AddConstructorEmployee
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

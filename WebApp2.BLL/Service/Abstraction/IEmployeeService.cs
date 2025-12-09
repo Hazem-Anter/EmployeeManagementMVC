@@ -12,10 +12,10 @@ namespace WebApp2.BLL.Service.Abstraction
 
         Response<EditEmployeeVM> EditEmployee(EditEmployeeVM editedEmployeeVM);  
         Response<bool> DeleteEmployee(DeleteEmployeeVM deleteEmployeeVM);
-        Response<bool> RehireEmployee(int id);
+        Response<bool> RehireEmployee(string id);
         Response<AddEmployeeVM> AddEmployee(AddEmployeeVM addEmployeeVM);
 
-        Response<GetEmployeeVM> GetEmployeeByID(int id);
+        Response<GetEmployeeVM> GetEmployeeByID(string id);
 
        
 

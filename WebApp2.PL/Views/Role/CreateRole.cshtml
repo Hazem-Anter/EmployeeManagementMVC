@@ -1,0 +1,82 @@
+﻿@using WebApp2.BLL.ModelVM.Role
+@model RoleVM
+
+<div class="d-flex justify-content-center align-items-center min-vh-100" style="backdrop-filter: blur(8px);">
+    <div class="card shadow-lg p-4 rounded-4 glass-card" style="width: 480px;">
+        <div class="card-body">
+            <h3 class="card-title text-center mb-4 fw-bold text-light">
+                🔐 @SharedLocalizer["Role"]
+            </h3>
+
+            <!-- Validation summary -->
+            <div asp-validation-summary="All" class="text-warning small mb-3"></div>
+
+            <form asp-action="CreateRole" asp-controller="Role" method="post">
+
+                <!-- role name -->
+                <div class="mb-3">
+                    <label asp-for="Name" class="form-label text-light fw-semibold">
+                        @SharedLocalizer["Name"]
+                    </label>
+                    <input asp-for="Name" class="form-control glass-input" placeholder="[User - Admin - HR . . ]" />
+                    <span asp-validation-for="Name" class="text-warning small"></span>
+                </div>
+
+                <!-- Buttons -->
+                <div class="d-flex justify-content-between align-items-center mt-4">
+                    <button type="submit" class="btn btn-success px-4 shadow-sm">
+                        🚀 @SharedLocalizer["Role"]
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    .glass-card {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(10px);
+    }
+
+    .glass-input {
+        background: rgba(255, 255, 255, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        color: #fff;
+        border-radius: 8px;
+        padding: 10px 12px;
+        transition: all 0.3s ease;
+    }
+
+        .glass-input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .glass-input:focus {
+            border-color: rgba(13, 110, 253, 0.8);
+            box-shadow: 0 0 10px rgba(13, 110, 253, 0.5);
+            outline: none;
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+    body {
+        color: #fff;
+    }
+
+    [dir="rtl"] .card-body {
+        text-align: right;
+    }
+
+    [dir="rtl"] label.form-label,
+    [dir="rtl"] .form-check-label {
+        display: block;
+        text-align: right;
+    }
+
+    [dir="rtl"] .d-flex.justify-content-between {
+        flex-direction: row-reverse;
+    }
+</style>

@@ -1,5 +1,14 @@
 ﻿
 @using System.Globalization
+@using Microsoft.AspNetCore.Identity
+@using WebApp2.DAL.Entity
+@inject SignInManager<WebApp2.DAL.Entity.Employee> SignInManager
+@inject UserManager<WebApp2.DAL.Entity.Employee> UserManager
+@{
+    var currentUser = SignInManager.IsSignedIn(User)
+        ? await UserManager.GetUserAsync(User)
+        : null;
+}
 @{
     var culture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
     var dir = culture == "ar" ? "rtl" : "ltr";
@@ -84,6 +93,34 @@
                         <li class="nav-item"><a class="nav-link" asp-action="Action" asp-controller="Employee">@SharedLocalizer["Action"]</a></li>
                         @* <li class="nav-item"><a class="nav-link" asp-action="Add" asp-controller="Employee">Add Employee</a></li>
                          *@
+
+                         <!-- 🔸 Auth Section -->
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-light" href="#" id="userDropdown" role="button"
+                               data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-person-circle"></i> @currentUser?.UserName
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                    <form asp-controller="Account" asp-action="Logout" method="post" class="px-3 py-1">
+                                        <button type="submit" class="btn btn-link text-danger p-0">@SharedLocalizer["Logout"]</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Account" asp-action="Login">@SharedLocalizer["Login"]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Account" asp-action="Register">@SharedLocalizer["Register"]</a>
+                        </li>
+                    }
+
                     </ul>
                 </div>
             </div>

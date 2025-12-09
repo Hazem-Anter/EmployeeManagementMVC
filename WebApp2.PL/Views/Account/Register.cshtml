@@ -1,0 +1,135 @@
+﻿@using WebApp2.BLL.ModelVM.Account
+@model RegisterEmployeeVM
+
+
+<div class="d-flex justify-content-center align-items-center min-vh-100" style="backdrop-filter: blur(8px);">
+    <div class="card shadow-lg p-4 rounded-4 glass-card" style="width: 480px;">
+        <div class="card-body">
+            <h3 class="card-title text-center mb-4 fw-bold text-light">
+                📝 @SharedLocalizer["Create account"]
+            </h3>
+
+            <form asp-action="Register" asp-controller="Account" method="post">
+
+
+                <!-- Email -->
+                <div class="mb-3">
+                    <label asp-for="Email" class="form-label text-light fw-semibold">
+                        @SharedLocalizer["Email"]
+                    </label>
+                    <input asp-for="Email" class="form-control glass-input" placeholder="email@domain.com" />
+                    <span asp-validation-for="Email" class="text-warning small"></span>
+                </div>
+
+                <!-- username -->
+                <div class="mb-3">
+                    <label asp-for="UserName" class="form-label text-light fw-semibold">
+                        @SharedLocalizer["UserName"]
+                    </label>
+                    <input asp-for="UserName" class="form-control glass-input" placeholder="email@domain.com" />
+                    <span asp-validation-for="UserName" class="text-warning small"></span>
+                </div>
+
+                <!-- Password -->
+                <div class="mb-3">
+                    <label asp-for="Password" class="form-label text-light fw-semibold">
+                        @SharedLocalizer["Password"]
+                    </label>
+                    <input asp-for="Password" type="password" class="form-control glass-input" placeholder="••••••••" />
+                    <span asp-validation-for="Password" class="text-warning small"></span>
+                </div>
+                
+                <!-- Full Name -->
+                <div class="mb-3">
+                    <label asp-for="Name" class="form-label text-light fw-semibold">
+                        @SharedLocalizer["Name"]
+                    </label>
+                    <input asp-for="Name" class="form-control glass-input" placeholder="e.g. Hazem Anter" />
+                    <span asp-validation-for="Name" class="text-warning small"></span>
+                </div>
+                <!-- Role -->
+                <div class="mb-3">
+                    <label asp-for="RoleName" class="form-label text-light fw-semibold">
+                        @SharedLocalizer["Role"]
+                    </label>
+                    <select asp-for="RoleName" class="form-control glass-input" placeholder="[user - admin - hr]">
+                        <option value="">-- @SharedLocalizer["Select Role"] --</option>
+                        <option value="user">user</option>
+                        <option value="admin">admin</option>
+                        <option value="hr">hr</option>
+                    </select>
+                    <span asp-validation-for="RoleName" class="text-warning small"></span>
+                </div>
+
+@* 
+                <!-- Confirm Password -->
+                <div class="mb-4">
+                    <label asp-for="ConfirmPassword" class="form-label text-light fw-semibold">
+                        @SharedLocalizer["Confirm Password"]
+                    </label>
+                    <input asp-for="ConfirmPassword" type="password" class="form-control glass-input" placeholder="••••••••" />
+                    <span asp-validation-for="ConfirmPassword" class="text-warning small"></span>
+                </div>
+ *@
+                <!-- Buttons -->
+                <div class="d-flex justify-content-between mt-4">
+                    <a asp-action="Login" asp-controller="Account" class="btn btn-outline-light px-4">
+                        ← @SharedLocalizer["Back to login"]
+                    </a>
+                    <button type="submit" class="btn btn-success px-4 shadow-sm">
+                        ✅ @SharedLocalizer["Register"]
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+<style>
+    .glass-card {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(10px);
+    }
+
+    .glass-input {
+        background: rgba(255, 255, 255, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        color: #fff;
+        border-radius: 8px;
+        padding: 10px 12px;
+        transition: all 0.3s ease;
+    }
+
+        .glass-input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .glass-input:focus {
+            border-color: rgba(13, 110, 253, 0.8);
+            box-shadow: 0 0 10px rgba(13, 110, 253, 0.5);
+            outline: none;
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+    body {
+        color: #fff;
+    }
+
+    [dir="rtl"] .card-body {
+        text-align: right;
+    }
+
+    [dir="rtl"] label.form-label,
+    [dir="rtl"] .form-check-label {
+        display: block;
+        text-align: right;
+    }
+
+    [dir="rtl"] .d-flex.justify-content-between {
+        flex-direction: row-reverse;
+    }
+</style>
+

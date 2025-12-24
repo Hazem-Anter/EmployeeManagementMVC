@@ -181,7 +181,3 @@ This project demonstrates:
 **Hazem Mohamed Anter**  
 Full Stack .NET Developer  
 ITI Graduate – Full Stack Web Development (.NET)
-
-
-│ ├── Repository Pattern
-│ ├── Entity Framework Core

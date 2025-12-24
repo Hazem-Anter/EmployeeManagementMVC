@@ -17,7 +17,7 @@ The system allows organizations to manage employees and departments efficiently,
 ## 🏗️ Architecture
 
 The solution follows a **3-Layer Clean Architecture**:
-
+```
 WebApp2
 │
 ├── PL (Presentation Layer)
@@ -34,7 +34,7 @@ WebApp2
 ├── DAL (Data Access Layer)
 │ ├── Entities
 
-
+```
 Each layer is isolated and communicates only through abstractions, ensuring loose coupling and testability.
 
 ---

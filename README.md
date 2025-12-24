@@ -22,7 +22,7 @@ WebApp2
 │
 ├── PL (Presentation Layer)
 │ ├── MVC Controllers
-│ ├── Razor Views
+│ ├── Views
 │ ├── Layouts & Partial Views
 │
 ├── BLL (Business Logic Layer)
@@ -33,7 +33,8 @@ WebApp2
 │
 ├── DAL (Data Access Layer)
 │ ├── Entities
-
+│ ├── Repository Pattern
+│ ├── Entity Framework Core
 ```
 Each layer is isolated and communicates only through abstractions, ensuring loose coupling and testability.
 
